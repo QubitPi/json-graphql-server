@@ -441,12 +441,19 @@ Here is how you can use the queries and mutations generated for your data, using
 Install the module locally:
 
 ```sh
-npm install --save-dev json-graphql-server
+npm install --save-dev json-graphql-server cors
+```
+
+or
+
+```shell
+yarn add -D json-graphql-server cors
 ```
 
 Then use the `jsonGraphqlExpress` express middleware:
 
 ```js
+import cors from "cors";
 import express from 'express';
 import jsonGraphqlExpress from 'json-graphql-server';
 
@@ -456,6 +463,7 @@ const data = {
     // ... your data
 };
 
+app.use(cors);
 app.use('/graphql', jsonGraphqlExpress.default(data));
 app.listen(PORT);
 ```
