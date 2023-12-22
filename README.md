@@ -454,17 +454,28 @@ Then use the `jsonGraphqlExpress` express middleware:
 
 ```js
 import cors from "cors";
-import express from 'express';
-import jsonGraphqlExpress from 'json-graphql-server';
+import express from "express";
+import jsonGraphqlExpress from "json-graphql-server";
 
-const PORT = 3000;
+const PORT = 5000;
 const app = express();
 const data = {
-    // ... your data
+  posts: [
+    { id: 1, title: "Lorem Ipsum", views: 254, user_id: 123 },
+    { id: 2, title: "Sic Dolor amet", views: 65, user_id: 456 },
+  ],
+  users: [
+    { id: 123, name: "John Doe" },
+    { id: 456, name: "Jane Doe" },
+  ],
+  comments: [
+    { id: 987, post_id: 1, body: "Consectetur adipiscing elit", date: new Date("2017-07-03") },
+    { id: 995, post_id: 1, body: "Nam molestie pellentesque dui", date: new Date("2017-08-17") },
+  ],
 };
 
-app.use(cors);
-app.use('/graphql', jsonGraphqlExpress.default(data));
+app.use(cors());
+app.use("/", jsonGraphqlExpress.default(data));
 app.listen(PORT);
 ```
 
